@@ -25,6 +25,10 @@ find_package(catkin REQUIRED COMPONENTS roscpp rostime std_msgs sensor_msgs node
 
 ## System dependencies are found with CMake's conventions
 find_package(OpenCV REQUIRED)
+#    PATHS "/usr/local"
+#    NO_DEFAULT_PATH)
+message(STATUS "opencv include dirs: ${OpenCV_INCLUDE_DIRS}")
+message(STATUS "opencv include dir: ${OpenCV_INCLUDE_DIR}")
 find_package(OpenMP)
 
 if(OPENMP_FOUND)
@@ -66,7 +70,7 @@ add_custom_target(additional_files_${PROJECT_NAME}
 
 include_directories(include
   ${catkin_INCLUDE_DIRS}
-  ${OpenCV_INCLUDE_DIR}
+  ${OpenCV_INCLUDE_DIRS}
   ${freenect2_INCLUDE_DIRS}
   ${kinect2_registration_INCLUDE_DIRS}
 )
@@ -82,10 +86,12 @@ add_definitions(-DK2_CALIB_PATH="${PROJECT_SOURCE_DIR}/data/")
 add_library(kinect2_bridge_nodelet SHARED src/kinect2_bridge.cpp)
 target_link_libraries(kinect2_bridge_nodelet
   ${catkin_LIBRARIES}
-  ${OpenCV_LIBRARIES}
+  ${OpenCV_LIBS}
   ${freenect2_LIBRARY}
   ${kinect2_registration_LIBRARY}
 )
+message(STATUS "opencv_libs: ${OpenCV_LIBS}")
+message(STATUS "opencv_libraries: ${OpenCV_LIBRARIES}")
 
 add_executable(kinect2_bridge src/kinect2_bridge.cpp)
 target_link_libraries(kinect2_bridge

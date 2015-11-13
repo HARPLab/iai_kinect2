@@ -716,8 +716,9 @@ private:
   void callbackStatus()
   {
     lockStatus.lock();
-    clientConnected = updateStatus();
-
+    //clientConnected = updateStatus();
+    updateStatus();
+    clientConnected = true;
     if(clientConnected && !deviceActive)
     {
       std::cout << "[kinect2_bridge] client connected. starting device..." << std::endl << std::flush;
@@ -767,6 +768,7 @@ private:
     {
       if(!deviceActive)
       {
+        callbackStatus();
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
         fpsTime =  ros::Time::now().toSec();
         nextFrame = fpsTime + deltaT;
