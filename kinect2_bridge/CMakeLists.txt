@@ -25,10 +25,6 @@ find_package(catkin REQUIRED COMPONENTS roscpp rostime std_msgs sensor_msgs node
 
 ## System dependencies are found with CMake's conventions
 find_package(OpenCV REQUIRED)
-#    PATHS "/usr/local"
-#    NO_DEFAULT_PATH)
-message(STATUS "opencv include dirs: ${OpenCV_INCLUDE_DIRS}")
-message(STATUS "opencv include dir: ${OpenCV_INCLUDE_DIR}")
 find_package(OpenMP)
 
 if(OPENMP_FOUND)
